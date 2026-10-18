@@ -61,7 +61,13 @@ class DirectoryApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true),
+      // Customization 1: Use a light theme with readable plum accents.
+      theme: ThemeData(
+        colorSchemeSeed: const Color(0xFF7B1E5A),
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: const Color(0xFFFFF8FC),
+        useMaterial3: true,
+      ),
       home: const DirectoryScreen(),
     );
   }
@@ -74,13 +80,22 @@ class DirectoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Campus Directory')),
+      appBar: AppBar(
+        title: const Text(
+          'Campus Directory',
+          style: TextStyle(color: Color(0xFF5C1745)),
+        ),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 244, 146, 201),
+        foregroundColor: const Color(0xFF5C1745),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           const SectionHeader(title: 'Students'),
           const SizedBox(height: 8),
-          for (final student in students) StudentCard(student: student),
+          for (final student in students)
+            StudentCard(student: student),
         ],
       ),
     );
@@ -91,7 +106,10 @@ class DirectoryScreen extends StatelessWidget {
 class SectionHeader extends StatelessWidget {
   final String title;
 
-  const SectionHeader({super.key, required this.title});
+  const SectionHeader({
+    super.key,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -111,18 +129,55 @@ class SectionHeader extends StatelessWidget {
   }
 }
 
+// This widget is stateless because its icon and text are supplied by its parent.
+class InfoRow extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  const InfoRow({
+    super.key,
+    required this.icon,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(
+          icon,
+          size: 18,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            text,
+            softWrap: true,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 // This widget is stateless because it only displays the supplied Student data.
 class StudentCard extends StatelessWidget {
   final Student student;
 
-  const StudentCard({super.key, required this.student});
+  const StudentCard({
+    super.key,
+    required this.student,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      // Customization 2: Rounded card corners.
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
+      // Customization 3: Add space inside each student card.
       margin: const EdgeInsets.symmetric(vertical: 6),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -130,6 +185,7 @@ class StudentCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
+              // Customization 4: Use a light teal avatar background.
               backgroundColor: const Color(0xFFF0D9E7),
               child: Text(
                 student.name[0],
@@ -154,9 +210,15 @@ class StudentCard extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(student.course),
                   const SizedBox(height: 8),
-                  Text('Year Level: ${student.yearLevel}'),
+                  InfoRow(
+                    icon: Icons.school,
+                    text: 'Year Level: ${student.yearLevel}',
+                  ),
                   const SizedBox(height: 4),
-                  Text(student.email),
+                  InfoRow(
+                    icon: Icons.email,
+                    text: student.email,
+                  ),
                 ],
               ),
             ),
