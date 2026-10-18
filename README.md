@@ -1,17 +1,15 @@
-# stateless_lab_macoto
+# Laboratory Activity 2
 
-A new Flutter project.
+**Name:** Yaohan M. Macoto  
+**Activity:** Building a Student Directory with Stateless Widget  
+**Project:** Campus Student Directory
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
+This Flutter application displays a campus student directory using reusable `StatelessWidget` classes. It shows student information, including names, courses, year levels, and email addresses. The application uses `Student`, `DirectoryApp`, `DirectoryScreen`, `SectionHeader`, `StudentCard`, and `InfoRow` to organize the interface into reusable components.
 
-A few resources to get you started if this is your first Flutter project:
+It also uses `Material 3`, a customized theme, and different styles for the student cards and information displayed on the screen.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Screenshot
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![App screenshot](screenshots/app.png)
